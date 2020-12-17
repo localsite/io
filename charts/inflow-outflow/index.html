@@ -13,12 +13,9 @@
 <script type="text/javascript" src="../../../localsite/js/localsite.js"></script>
 <script type="text/javascript" src="../../../localsite/js/navigation.js"></script>
 
-<style>
-.MuiDataGrid-root .MuiDataGrid-window {
-    overflow-x: hidden !important;
-    /* overflow-y: hidden !important; */
-}
+<link rel="stylesheet" type="text/css" href="/localsite/css/bootstrap.darkly.min.css"/>
 
+<style>
 #impactIcons div {
     float: left;
     font-size: 13px;
@@ -32,60 +29,204 @@
     border: 4px solid #aaa;
     padding: 17px;
 }
+#impactIcons div:hover {
+    cursor: pointer;
+    background-color: rgba(33,33,33,.8);
+}
+.fixedBkgd {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    min-width: 1040px;
+}
+.buttonLinks a {
+    background-color: #779;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 0 10px 14px 0;
+    font-size: 16px;
+}
+.buttonLinks a:hover {
+    background-color: #77f;
+    text-decoration: none;
+}
+#impactTopBar {
+    float:left;
+}
+#impactTopBar div {
+    font-size: 14px;
+    color: #fff;
+    background-color: #779;
+    padding: 8px 28px;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 0 10px 14px 0;
+    float: left;
+}
+#impactTopBar div a:visited {
+    color: #fff !important;
+}
+#impactTopBar div a:link {
+    color: #fff !important;
+}
+#impactTopBar .active {
+    background-color: #333;
+}
+
+/* For darkly */
+.MuiGrid-container {
+    background-color: rgba(33,33,33,.8);
+}
+.MuiGrid-item {
+    background-color: #ddd;
+}
+.MuiDataGrid-mainGridContainer {
+    background-color: #fff;
+}
+
+.MuiDataGrid-root .MuiDataGrid-window {
+    overflow-x: hidden !important;
+    /* overflow-y: hidden !important; */
+}
+.MuiTypography-h6 {
+    color: #333;
+}
 </style>
+
+<!-- For Facebook -->
+<meta property="og:type" content="article" />
+<meta property="og:image" content="https://model.earth/io/charts/inflow-outflow/img/social-thumb.jpg" />
+<meta property="og:url" content="https://model.earth/io/charts/inflow-outflow/" />
+<meta property="og:title" content="Inflow-Outflow" />
+<meta property="og:description" content="Environmentally Enabled Impact Analysis" />
+
+<!-- For Twitter -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Inflow-Outflow" />
+<meta name="twitter:description" content="Environmentally Enabled Impact Analysis." />
+<meta name="twitter:image" content="https://model.earth/io/charts/inflow-outflow/img/social-thumb.jpg" />
+
+<script>
+    $(document).ready(function() {
+
+    // `hashChangeEvent` event reside in multiple widgets. 
+    // Called by goHash within localsite.js
+    document.addEventListener('hashChangeEvent', function (elem) {
+        if (location.host.indexOf('localhost') >= 0) {
+            //alert('hashChangeEvent'); // Invoked twice by iogrid inflow-outflow chart
+        }
+    }, false);
+            
+});
+</script>
+
 </head>
 
 <body>
+<div style="padding:0px">
+    <div style="position:relative; width:100%">
+        <!--  
+        <div class="lazy bgimg bgimg-notfixed" data-src="img/bkgd.jpg" style="opacity:.85">
+            <img src="img/bkgd.jpg" style="opacity:0;width:100%">
+        </div>
+        -->
 
-<div class="contentpadding" style="padding-bottom:20px">
+        <!--
+            Background source:
+            Airbender: https://wallpapersafari.com/w/fXi214
+            Avatar: 
+        -->
 
-    <div style="float:right;">
-        <div id="impactIcons">
-            <div>Air</div>
-            <div>Water</div>
-            <div class="active">Land</div>
-            <div>Energy</div>
-            <div>Prosperity</div>
-            <div>Health</div>
-        </div><br>
+        <img class="fixedBkgd backgroundAbsoluteX" src="img/bkgd.jpg" style="width:100%;" alt="">
 
-        <div class="hideMobile" style="float:right; margin:20px 20px 0 0; font-size: 13px">
-            <a href="../../../community/tools/#projects">A work in progress</a>
+        <div class="contentpadding" style="position:absolute; top:0px; right:0px; width:100%; padding-bottom:20px; background-color: rgba(33,33,33,.5);">
+
+            <div style="float:right;" class="hideMobile">
+                <div id="impactIcons">
+                    <!-- ,MGHG,OGHG,HRSP,OZON,SMOG,HAPS some must be wrong -->
+                    <div onclick="goHash({'set':'air','indicators':'GCC'});">Air</div>
+                    <div onclick="goHash({'set':'water','indicators':'WATR,ACID,EUTR,ETOX'});">Water</div>
+                    <div onclick="goHash({'set':'land','indicators':'MNRL,PEST,METL,CRHW,CMSW,FMSW,CCDD'});">Land</div>
+                    <div onclick="goHash({'set':'energy','indicators':'NNRG,RNRG,ENRG'});">Energy</div>
+                    <div onclick="goHash({'set':'wealth','indicators':'VADD,JOBS'});" class="active">Wealth</div>
+                    <div onclick="goHash({'set':'health','indicators':'HCAN,HNCN,HTOX'});">Health</div>
+                </div><br>
+
+                
+            </div>
+
+            <div style="float:left;">
+                <!--
+                Preventing Water Eutrophication
+                Excessive Growth of Algae
+                -->
+                <!-- Minerals and Metal Use 
+                Impacts on Water
+                -->
+                <h1 id="pageTitle" class="h1-home" style="margin-top:0px; margin-bottom:10px;">Jobs and Value Added</h1>
+
+                <div style="clear:both; font-size: 13px">
+                <a href="#sectors=326210:100,335991:100&page=1&count=10">Inflow Outflow</a> | 
+                <a href="../../charts/sankey/">Flow Diagram</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div style="float:left;">
-        <a style="font-size: 13px" href="https://github.com/modelearth/useeior/blob/Bio-Modeling/inst/extdata/USEEIO_LCIA_Indicators.csv">Impact Areas</a><br>
-        <h1 style="margin-top:0px; margin-bottom:10px;">Minerals and Metal Use</h1>
+    <br><br><br><br><br><br><br><br>
 
-        <div style="clear:both; font-size: 13px">
-        <a href="../../../localsite/info/">Industry Details</a> | 
-        <b>Supply Chain</b> | 
-        <a href="../../charts/sankey/">Flow Diagram</a> | 
-        All
+    <div class="local" style="display:none">
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+        <div class="contentpadding">
+            <div style="background-color:#559; padding:30px; max-width:700px; border-radius:8px">
+                <h2 style="padding-top:0px">Ask a question [annyang placeholder]&nbsp; Say . . .</h2>
+                <div class="buttonLinks" style="margin:20px 20px 0 0; font-size: 13px">
+                    <a href="https://github.com/modelearth/useeior/blob/Bio-Modeling/inst/extdata/USEEIO_LCIA_Indicators.csv">Show Impact Areas</a>
+                    <a href="#chart">Show Water Impacts</a>
+                    <a href="../../../community/tools/#projects" style="margin-right:0px">Show Project Areas</a>
+                </div>
+            </div>
         </div>
+        
     </div>
+
+
 </div>
+
+
 
 <div style="clear:both;"></div>
 
-<hr style="clear:both; margin:10px 0 0 0; padding:10px 0 0 0">
 
-<div class="contentpadding" >
+
+<!--hr style="clear:both; margin:10px 0 0 0; padding:10px 0 0 0"-->
+
+<div class="contentpadding">
 
 <!-- INFLOW OUTFLOW -->
 <!--
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 -->
+<div style="display:none">
+    <div id="impactTopBar">
+        <div class="active">Quantity of Water Used</div>
+        <div>Causes Acid Rain</div>
+        <div>Harmful Algae Growth</div><!-- Water Eutrophication -->
+        <div>Toxic to Fish</div>
+    </div>
+</div>
 
 <div id="iogrid"></div>
 
 <script src="../../build/lib/d3.min.js"></script>
 <script src="../../build/lib/useeio_widgets.js"></script>
 <script>
-	var naics = "311615,311812,321113,221112,113310,322110,311821,311612,325211,311813,311911,311919,311830,311119,322121,311824,311941,325991,311710,311930";
+	//var naics = "311615,311812,321113,221112,113310,322110,311821,311612,325211,311813,311911,311919,311830,311119,322121,311824,311941,325991,311710,311930";
 
-    var naicsCodes = naics.split(',');
+    //var naicsCodes = naics.split(',');
 
     var config = useeio.urlConfig();
 
@@ -121,9 +262,51 @@ Prior version...<br>
 -->
 
 <br><br>
-We're using <a href="https://material-ui.com/components/slider/">material-ui sliders</a>
+We're using <a href="https://material-ui.com/components/slider/">Material-UI Sliders</a>
 
 </div>
+<br>
+
+<script>
+    // INIT
+var priorHashLocal = {};
+
+/* Allows map to remove selected shapes when backing up. */
+document.addEventListener('hashChangeEvent', function (elem) {
+    console.log("inflow-outflow page detects hashChangeEvent");
+    refreshWidgetsLocal();
+}, false);
+
+function refreshWidgetsLocal() {
+    
+    param = loadParams(location.search,location.hash); // param is declared in localsite.js
+    let hash = getHash();
+    //alert(hash.set + ' ' + priorHashLocal.set);
+
+    if (hash.set != priorHashLocal.set) {
+        if (hash.set == "air") {
+            $('#pageTitle').text('Air and Climate')
+        } else if (hash.set == "water") {
+            $('#pageTitle').text('Water Use and Quality')
+        } else if (hash.set == "land") {
+            $('#pageTitle').text('Land Use')
+        } else if (hash.set == "energy") {
+            $('#pageTitle').text('Energy Use')
+        } else if (hash.set == "wealth") {
+            $('#pageTitle').text('Jobs and Value Added')
+        } else if (hash.set == "health") {
+            $('#pageTitle').text('Health Impact')
+        }
+        $("#impactIcons div").removeClass("active");
+        const capitalizeSetName = hash.set.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+            return letter.toUpperCase();
+        });
+        $("#impactIcons div:contains(" + capitalizeSetName + ")").addClass("active");
+    }
+    priorHashLocal = getHash();
+}
+refreshWidgetsLocal();
+</script>
 
 </body>
 </html>

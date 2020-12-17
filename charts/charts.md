@@ -1,10 +1,9 @@
 # Embeddable IO Widgets
-
+<div class="floatright">
+<img src="../img/logo/epa.png" style="width:100%; max-width:200px; margin-left:30px">
+</div>
 [Local Industry Evaluator](../../localsite/info/) - Contains multiple widgets - Leaflet, JQuery and React  
-[PPE Supplier Map](../../localsite/map/#show=suppliers) - Leaflet and JQuery  
-[Farm Fresh Produce Map](../../localsite/map/#show=farmfresh) - Leaflet and JQuery  
-[Simple embedded map sample](embed/)<!-- Remove: https://model.earth/community/impact/ -->  
-[Getting started with localsite](https://model.earth/localsite/start/)  
+[Getting started with localsite](https://model.earth/localsite/start/) - clone [io repo](https://github.com/modelearth/io/) and [localsite repo](https://github.com/localsite/localsite/) into the same web root.  
 
 <!--
 ## Environmentally-Enabled <span style="white-space:nowrap">Input-Output Model</span>
@@ -23,17 +22,17 @@ Rstudio has devtools intalled already, so maybe just library(devtools) to call i
 <style>
 </style>
 
-<div class="floatright">
-<img src="../img/logo/epa.png" style="width:100%; max-width:200px; margin-left:30px">
-</div>
-
 
 ## React Widgets
 
-The following originate from the [USEEIO-widgets repo](https://github.com/USEPA/useeio-widgets/).  
-View [module documentation and functions](https://useeiowidgets.imfast.io/apidoc/modules/_main_.html) generated using [TypeDoc](https://typedoc.org/).  
+[View documentation and functions](https://useeiowidgets.imfast.io/apidoc/modules/_main_.html) - 
+[new loc](https://msrocka.github.io/useeio-widget-builds/apidoc/) generated using [TypeDoc](https://typedoc.org/).  
 
-[Inflow-Outflow Chart](inflow-outflow/#sectors=326210&page=1&count=10) - <a href="../build/slider.html#sectors=322130,327910,541200&page=1&count=10">Widget only</a><!-- 
+The React widgets in the io repo originate from the EPA's [USEEIO-widgets repo](https://github.com/USEPA/useeio-widgets/) - [see build](https://msrocka.github.io/useeio-widget-builds/).  
+You can make widget updates in the [model.earth io repo](https://github.com/modelearth/io/) and we'll push into the EPA repo from [StateData](https://github.com/StateData/useeio-widgets/).  
+The io repo includes additional code for displaying widgets. We also publish via the [io build folder](../build).  
+
+[Inflow-Outflow Chart](inflow-outflow/#sectors=333613,335912,336111&page=1&count=10) - <a href="../build/slider.html#sectors=333613,335912,336111&page=1&count=10">Widget only</a><!-- 
 [imfast.io](https://useeiowidgets.imfast.io/slider.html#sectors=322130,325520,327910,541200)-->  
 [Sector List - Mosaic](../build/sector_list.html?view=mosaic&count=50)  
 [Sector List - One indicator](../build/sector_list.html#view=mosaic&indicators=WATR&showvalues=true)<!--
@@ -53,6 +52,14 @@ If your local widgets reference the "useeio" folder, they may need to be updated
 
 ([old version](https://model.earth/eeio/build.2020.001), [pre-React](https://model.earth/eeio/build.2020.003) and [new version](useeio)) 
 -->
+
+## Related Map Work
+
+[Simple embedded map sample](embed/)<!-- Remove: https://model.earth/community/impact/ -->  
+[PPE Supplier Map](../../localsite/map/#show=suppliers) - Leaflet and JQuery  
+[Farm Fresh Produce Map](../../localsite/map/#show=farmfresh) - Leaflet and JQuery  
+
+
 <br>
 
 
@@ -76,7 +83,7 @@ from the [GitHub source code](https://github.com/USEPA/useeio-widgets)
 You can build the USEEIO React widgets locally.  Start with the following repo:
 
 [https://github.com/modelearth/io](https://github.com/modelearth/io)  
-The io repo contains a fork of [useeio-widgets](https://github.com/usepa/useeio-widgets), plus a built copy and extras.  
+The io repo contains a fork of [useeio-widgets](https://github.com/usepa/useeio-widgets), plus a built copy and extras (navigation and configuration examples).  
 
 Also clone the [https://github.com/localsite/localsite](https://github.com/localsite/localsite) repo and place it adjacent to the "io" repo.  
 Here's info on [getting localhost setup on your local computer](../../localsite/start/).
@@ -181,13 +188,15 @@ If you are working in a direct fork of the "useeio-widgets" repo, view here:
 
 ## How to Modify Widgets within VS Code
 
-To make updates in the NodeJS source code, fork the [USEEIO-widgets](https://github.com/USEPA/useeio-widgets/) repo and save in your local webroot (where you've [pointed](../../localsite/start/) http://localhost:8887/)  
+Open a command prompt in the "io" repo folder and type:
 
-Edit the files that reside in useeio-widgets/src. (Avoid editing files in useeio-widgets/build, these will be overwritten when you run the build.)
+	code .
 
-[Configure your VS Code Editor](https://code.visualstudio.com/docs/setup/setup-overview) so running `code .` within the <b>USEEIO-widgets folder</b> launches the editor.  IMPORTANT: Avoid running in the parent folder, or your VS Code editor will not allow you to run subsequent commands inside its terminal.  
+Note: You may need to [Configure your VS Code Editor](https://code.visualstudio.com/docs/setup/setup-overview) so running `code .` launches the editor.  Avoid running in io's parent folder, or your VS Code editor will not allow you to run subsequent commands inside its terminal.  
 
-Open a command shell window within VS Code (Ctrl + \` backtick) or (View > Terminal) and type the following: 
+If you have not yet run `npm install` and the API to JSON download, start with the steps above.  
+
+Next, open a command shell window within VS Code (Ctrl + \` backtick) or (View > Terminal) and type the following: 
 
 	npm run build
 
@@ -195,7 +204,13 @@ Use the up-arrow to run the line above again after making a change.
 
 View the output of your build at [http://localhost:8887/io/build](http://localhost:8887/io/build) 
 
-Learn more in the VS Code [Node.js Tutorial](https://code.visualstudio.com/docs/nodejs/nodejs-tutorial).  
+Learn more in the VS Code [Node.js Tutorial](https://code.visualstudio.com/docs/nodejs/nodejs-tutorial). 
+
+### You may also contribute to the USEEIO-widget repo directly
+
+To make updates in the NodeJS source code, fork the [USEEIO-widgets](https://github.com/USEPA/useeio-widgets/) repo and save in your local webroot (where you've [pointed](../../localsite/start/) http://localhost:8887/)  
+
+Edit the files that reside in useeio-widgets/src. (Avoid editing files in useeio-widgets/build, these will be overwritten when you run the build.) 
 
 
 Testing this:  
@@ -221,8 +236,16 @@ if you don't see it, be sure to right-click in the file folder when opening and 
 
 -->
 
+## FAQs
+
+### Why are some values in the demand vector $0 (blank)?
+
+In some cases there is no final demand for the respective commodity and the production of that commodity is only driven by intermediate industry transactions (note that there are different demand vectors in the model and that the selected demand can be controlled via the configuration attributes). 
 
 
+### How is code formatting enforced?
+
+The `.editorconfig` file contains the formatting settings. Modern editors have plugins for checking EditorConfig settings. This maintains consistench so we can see in the diffs what changed. There is also a ESLint configuration in the project for other settings like semicolon rules etc.
 
 
 ## Sustainable Communities Web Challenge

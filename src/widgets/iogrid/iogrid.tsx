@@ -1,13 +1,14 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Grid} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 import { Indicator, Matrix, Model, Sector } from "../../webapi";
 import { Config, Widget } from "../../widget";
-import { isNotNone, isNone } from "../../util/util";
+import { isNotNone, isNone, TMap } from "../../util/util";
 import { zeros } from "../../calc/calc";
 import * as strings from "../../util/strings";
+import * as naics from "../../naics";
 
 import { CommodityList } from "./commodity-list";
 import { FlowList } from "./flow-list";
@@ -47,6 +48,9 @@ export class IOGrid extends Widget {
             await this.initialize();
         }
 
+        const commoditySectors = naics.filterByNAICS(
+            config.naics, this.sectors);
+
         // render the three columns:
         // inputs | commodities | outputs
         ReactDOM.render(
@@ -60,8 +64,7 @@ export class IOGrid extends Widget {
                 <Grid item style={{ width: "40%" }}>
                     <CommodityList
                         config={config}
-                        sectors={this.sectors}
-                        indicators={this.indicators}
+                        sectors={commoditySectors}
                         widget={this} />
                 </Grid>
                 <Grid item style={{ width: "30%" }}>
@@ -213,11 +216,44 @@ export class IOGrid extends Widget {
         return flows;
     }
 
-    public getIndicatorResults(indicator: Indicator): number[] {
+    getIndicatorResults(indicator: Indicator): number[] {
         return !indicator
             ? zeros(this.sectors.length)
             : this.directImpacts.getRow(indicator.index);
     }
+
+    getSortedIndicators(): Indicator[] {
+        if (!this.indicators) {
+            return [];
+        }
+        // it was specified, that these indicators should be always
+        // at the top of the list ...
+        const predef: TMap<number> = {
+            "Jobs Supported": 1,
+            "Value Added": 2,
+            "Energy Use": 3,
+            "Land Use": 4,
+            "Water Use": 5,
+        };
+
+        return this.indicators.sort((i1, i2) => {
+            const name1 = i1.simplename || i1.name;
+            const name2 = i2.simplename || i2.name;
+            const c1 = predef[name1];
+            const c2 = predef[name2];
+            if (isNotNone(c1) && isNotNone(c2)) {
+                return c1 - c2;
+            }
+            if (isNotNone(c1)) {
+                return -1;
+            }
+            if (isNotNone(c2)) {
+                return 1;
+            }
+            return strings.compare(name1, name2);
+        });
+    }
+
 }
 
 
