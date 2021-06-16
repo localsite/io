@@ -3,7 +3,12 @@
 <img src="../img/logo/epa.png" style="width:100%; max-width:200px; margin-left:30px">
 </div>
 [Local Industry Evaluator](../../localsite/info/) - Contains multiple widgets - Leaflet, JQuery and React  
-[Getting started with localsite](https://model.earth/localsite/start/) - clone [io repo](https://github.com/modelearth/io/) and [localsite repo](https://github.com/localsite/localsite/) into the same web root.  
+Samples: 
+<a href="../../localsite/info/#state=GA&regiontitle=Coastal+Georgia&geo=US13127,US13039,US13191,US13179,US13029,US13051">Coastal Georgia</a> <span style="position:absolute; font-size:35px; line-height:13px; padding:3px 0 0 1px">&#8227;</span> &nbsp;&nbsp; &nbsp; 
+<a href="../../localsite/info/#show=bioeconomy&state=GA&regiontitle=Coastal+Georgia&geo=US13127,US13039,US13191,US13179,US13029,US13051">Bioeconomy and Energy</a>
+                
+
+[Getting started with localsite](https://model.earth/localsite/start/) - clone [io repo](https://github.com/modelearth/io/) and [localsite repo](https://github.com/modelearth/localsite/) into the same web root.  
 
 <!--
 ## Environmentally-Enabled <span style="white-space:nowrap">Input-Output Model</span>
@@ -31,14 +36,16 @@ The React widgets in the [io repo](https://github.com/modelearth/io/) originate 
 You can make widget updates in the [model.earth io repo](https://github.com/modelearth/io/) and we'll push into the EPA repo from [StateData](https://github.com/StateData/useeio-widgets/).  
 The io repo includes additional code for displaying widgets. We also publish via the [io build folder](../build).  
 
-- [Inflow-Outflow Chart](inflow-outflow/#sectors=333613,335912,336111&set=wealth&indicators=VADD) - (<a href="../build/slider.html#sectors=333613,335912,336111">Widget only</a>)<!-- &page=1&count=10 --><!-- [imfast.io](https://useeiowidgets.imfast.io/slider.html#sectors=322130,325520,327910,541200)-->  
+- [Inflow-Outflow Chart](inflow-outflow/#set=prosperity&indicators=VADD,JOBS) - [Tires](inflow-outflow/#sectors=326210&set=prosperity&indicators=JOBS,VADD) - (<a href="../build/slider.html#indicators=ENRG,GHG,VADD&sectors=113000,327310,327400,333613,335912,336111,562111,562212&page=1">Widget only</a>)<!-- &page=1&count=10 --><!-- [imfast.io](https://useeiowidgets.imfast.io/slider.html#sectors=322130,325520,327910,541200)-->  
 - [Sector List - Mosaic](../build/sector_list.html?view=mosaic&count=50)  
 - [Sector List - Mosaic Limit Sectors](../build/sector_list.html?naics=333613,335912,336111&view=mosaic&count=50)  
 - [Sector List - Display Values](../build/sector_list.html?view=mosaic&showvalues=true)  
-- [Sector List - One indicator](../build/sector_list.html#view=mosaic&indicators=WATR&showvalues=true)  
+- [Sector List - Two positive indicators](../build/sector_list.html#view=mosaic&view_indicators=JOBS,VADD&showvalues=true)
+<!--
 - [Sector List IO - Tire manufacturing (older version)](../build/iotables.html#sectors=326210&page=5)  
+-->
 - [Industry Impact Bars with Configuration](../build/impact_chart_config.html)    
-- [More React widgets](../build/) - ([Recent build](https://msrocka.github.io/useeio-widget-builds/))  
+- [More React widgets](../build/) - ([Recent build 1](https://msrocka.github.io/useeio-widget-builds/)) - ([Recent build 2](https://thetisiboth.github.io/useeio-widget-builds/))    
 
 ## JQuery Widgets 
 
@@ -90,6 +97,7 @@ If you use the "io" repo, also clone the [https://github.com/localsite/localsite
 
 B. [USEEIO-widgets repo](https://github.com/USEPA/useeio-widgets/) - Only React widgets  
 
+<span style="background:red; padding:3px; color:#fff">NOTE:</span> The code in the useeio-widgets repo currently causes a runaway processor in the browser when used with the "localsite" repo. To avoid, the "localsite/build" folder contains the recent code from [Recent build 2](https://thetisiboth.github.io/useeio-widget-builds/).
 
 <!--After building the widgets, you will need an API key to download the industry sector data JSON files, or you can copy the JSON files from the pre-built static copy. Post an issue to request a key.  -->
 
@@ -137,7 +145,10 @@ If you receive a "high severity vulnerabilities" warning, run the following as a
 pre-React and with React, ignored:
 	`gyp` failed with exit code: 1
 -->
-Then build the widget libraries. (Note that if you are using the "io" repo you'll already have a pre-built "build" folder.)
+Then build the widget libraries. If you are using the "io" repo you'll already have a pre-built "build" folder.
+
+<span style="background:red; padding:3px; color:#fff">NOTE:</span> We recommend avoiding running the following build command. The code in the useeio-widgets repo currently causes a runaway processor in the browser when used with the "localsite" repo. To avoid, the "localsite/build" folder contains the recent code from [Recent build 2](https://thetisiboth.github.io/useeio-widget-builds/).
+
 
 ```
 npm run build
@@ -165,7 +176,7 @@ Note: Every 90 days the staging server requires a reboot, email the [contact per
 If the '/api' address returns 404, you can use the staging 
 <a href="https://smmtool.app.cloud.gov/" target="_blank">endpoint overview</a> to see if it is online.  
 
-You may optionall [request the key](https://github.com/USEPA/USEEIO_API/wiki/Use-the-API) to the production API to run the following:  
+You may optionall [request the key](https://github.com/USEPA/USEEIO_API/wiki/Use-the-API) to the production API to run the following (Interns may use the key in our Google Sheet):  
 
 ```
 npm run download -- --endpoint https://api.edap-cluster.com/useeio/api --apikey [Add API key here]
